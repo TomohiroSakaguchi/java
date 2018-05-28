@@ -16,7 +16,11 @@ public class Prime{
           System.out.println(n+"素数です");
           break;
         }
-        if (n%cnt == 0 || n == 1) {//nをcntで割って余りが0 or 1が入力された場合
+        if (n == 1) {//1が入力された場合
+          System.out.println(n+"は素数ではない");
+          break;
+        }
+        if (n%cnt == 0) {//nをcntで割って余りが0
           System.out.println(n+"は素数ではない");
           System.out.println(cnt+" と "+(n/cnt)+" で割れます");
           break;

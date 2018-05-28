@@ -6,20 +6,17 @@ public class Prime{
     //素数を判定するプログラム
     while(true){
       System.out.println("数を入力してください");
-      String s = br.readLine();
+      String s = br.readLine();//コマンド上で数を入力
       int n = Integer.parseInt(s);
 
-      /*for (int cnt = 2; cnt<n-1; cnt++) {
-      }
-      */
-      int cnt = 2;
+      int cnt = 2;//割る数の変数
       boolean flg = true;
-      while(flg){
-        if (n == cnt) {
+      while(flg){//cntを増やしてnを割り切れるか判定していく
+        if (n == cnt || n == 2) {//入力した数とcntが同じor2が入力された場合は素数
           System.out.println(n+"素数です");
           break;
         }
-        if (n%cnt == 0) {
+        if (n%cnt == 0 || n == 1) {//nをcntで割って余りが0 or 1が入力された場合
           System.out.println(n+"は素数ではない");
           System.out.println(cnt+" と "+(n/cnt)+" で割れます");
           break;

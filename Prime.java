@@ -1,3 +1,7 @@
+/*
+Copyright Sakaguchi Tomohiro
+*/
+
 import java.io.*;
 
 public class Prime{

@@ -10,6 +10,7 @@ public class Prime{
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     //素数を判定するプログラム
     while(true){
+      System.out.println("素数かどうかを判定するプログラムです");
       System.out.println("数を入力してください");
       String s = br.readLine();//コマンド上で数を入力
       int n = Integer.parseInt(s);

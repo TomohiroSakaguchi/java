@@ -39,7 +39,7 @@ public class Prime{
         System.out.println("プログラムは終了しました");
         break;
       }
-      else {
+      else if(ans.equals("y") || ans.equals("Y")){
         flg = true;
         System.out.println();
       }

@@ -50,7 +50,7 @@ class Paint4 extends Frame implements MouseListener,MouseMotionListener,ActionLi
 		c7.setBounds(560,230,60,30);
 		c8.setBounds(560,260,60,30);
 		end.setBounds(560,330,60,30);
-		reset.setBounds(560,360,60,30);
+		reset.setBounds(560,360,60,35);
 		setLayout(null);
 		add(c1);
 		add(c2);

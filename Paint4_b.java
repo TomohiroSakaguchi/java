@@ -113,12 +113,11 @@ class Paint4 extends Frame implements MouseListener,MouseMotionListener,ActionLi
 		}
 	}
 	public void mousePressed(MouseEvent e){
-		Checkbox fig, col;
+		Checkbox c;
 		x=e.getX();
 		y=e.getY();
-		fig=cbg.getSelectedCheckbox();
-		col=cbg2.getSelectedCheckbox(); //色を変えるための条件
-		/*
+		c=cbg2.getSelectedCheckbox(); //色を変えるための条件
+    System.out.println("色のデータ"+c);
 		if(c==c5){
 			t=1;
 		} else if(c==c6){
@@ -128,26 +127,34 @@ class Paint4 extends Frame implements MouseListener,MouseMotionListener,ActionLi
 		} else if(c==c8){
 			t=4;
 		}
-		*/
 		obj=null;
-		if(fig==c1){
+		x=e.getX();
+		y=e.getY();
+		c=cbg.getSelectedCheckbox();
+    System.out.println("図形データ"+c);
+		obj=null;
+		if(c==c1){
 			mode=1;
-			obj=new Ring(col); //色の引数tを代入
-		} else if(fig==c2){
+			obj=new Ring(t); //色の引数tを代入
+		} else if(c==c2){
 			mode=2;
-			obj=new Circle(col); //色の引数tを代入
-		} else if(fig==c3){
+			obj=new Circle(t); //色の引数tを代入
+		} else if(c==c3){
 			mode=2;
-			obj=new Box(col); //色の引数tを代入
-		} else if(fig==c4){
+			obj=new Box(t); //色の引数tを代入
+		} else if(c==c4){
 			mode=2;
-			obj=new Line(col); //色の引数tを代入
+			obj=new Line(t); //色の引数tを代入
 		} if(obj != null){
 			obj.moveto(x,y);
 			repaint();
 		}
 	}
 	public void mouseReleased(MouseEvent e){
+// 		if(obj==reset){ //初期化ボタンが押されたときにすぐ消えるように条件分岐をいれた
+// 			repaint();
+// 		}
+// 		else{
 			x=e.getX();
 			y=e.getY();
 			if(mode==1)		obj.moveto(x,y);
@@ -158,6 +165,7 @@ class Paint4 extends Frame implements MouseListener,MouseMotionListener,ActionLi
 			}
 			mode=0;
 			repaint();
+// 		}
 	}
 	public void mouseClicked(MouseEvent e){}
 	public void mouseEntered(MouseEvent e){}
@@ -191,7 +199,7 @@ class Coord implements Serializable{
 class Figure extends Coord implements Serializable{
 	int color;
 	int w,h;
-	Checkbox select;
+	int t,select;
 	Figure(){
 		color=0;
 		w=h=0;
@@ -204,16 +212,16 @@ class Figure extends Coord implements Serializable{
 }
 class Ring extends Figure implements Serializable{ //丸を描画するclass
 	int size;
-	Ring(Checkbox c){ //引数tがここにくる
+	Ring(int t){ //引数tがここにくる
 		size=10;
-		select=c; //selectに代入してtに影響が無いようにする
+		select=t; //selectに代入してtに影響が無いようにする
 	}
 	@Override public void paint(Graphics g){
-		if(select.equals(c5)){
+		if(select==1){
 			g.setColor(Color.black);
-		} else if(select.equals(c6)){
+		} else if(select==2){
 			g.setColor(Color.blue);
-		} else if(select.equals(c7)){
+		} else if(select==3){
 			g.setColor(Color.yellow);
 		} else
 			g.setColor(Color.red);
@@ -221,15 +229,15 @@ class Ring extends Figure implements Serializable{ //丸を描画するclass
 	}
 }
 class Circle extends Figure implements Serializable{ //円を描画するclass
-	Circle(Checkbox c){ //引数tがここにくる
-		select=c; //selectに代入してtに影響が無いようにする
+	Circle(int t){ //引数tがここにくる
+		select=t; //selectに代入してtに影響が無いようにする
 	}
 	@Override public void paint(Graphics g){
-		if(select.equals(c5)){
+		if(select==1){
 			g.setColor(Color.black);
-		} else if(select.equals(c6)){
+		} else if(select==2){
 			g.setColor(Color.blue);
-		} else if(select.equals(c7)){
+		} else if(select==3){
 			g.setColor(Color.yellow);
 		} else
 			g.setColor(Color.red);
@@ -238,15 +246,15 @@ class Circle extends Figure implements Serializable{ //円を描画するclass
 	}
 }
 class Box extends Figure implements Serializable{ //四角形を描画するclass
-	Box(Checkbox c){ //引数tがここにくる
-		select=c; //selectに代入してtに影響が無いようにする
+	Box(int t){ //引数tがここにくる
+		select=t; //selectに代入してtに影響が無いようにする
 	}
 	@Override public void paint(Graphics g){
-		if(select.equals(c5)){
+		if(select==1){
 			g.setColor(Color.black);
-		} else if(select.equals(c6)){
+		} else if(select==2){
 			g.setColor(Color.blue);
-		} else if(select.equals(c7)){
+		} else if(select==3){
 			g.setColor(Color.yellow);
 		} else
 			g.setColor(Color.red);
@@ -267,15 +275,15 @@ class Box extends Figure implements Serializable{ //四角形を描画するclas
 }
 
 class Line extends Figure implements Serializable{ //線を描画するためのclass
-	Line(Checkbox c){ //引数tがここにくる
-		select=c; //selectに代入してtに影響が無いようにする
+	Line(int t){ //引数tがここにくる
+		select=t; //selectに代入してtに影響が無いようにする
 	}
 	@Override public void paint(Graphics g){
-		if(select.equals(c5)){
+		if(select==1){
 			g.setColor(Color.black);
-		} else if(select.equals(c6)){
+		} else if(select==2){
 			g.setColor(Color.blue);
-		} else if(select.equals(c7)){
+		} else if(select==3){
 			g.setColor(Color.yellow);
 		} else
 			g.setColor(Color.red);

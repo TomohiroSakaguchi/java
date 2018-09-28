@@ -5,7 +5,7 @@ import java.awt.image.*;
 
 class showAnim{
   public static void main(String[] args) {
-    AppFrame f = new AppFrame();
+    AppFrame f = new AppFrame(args[0]);
     f.setSize(640,480);
     f.addWindowListener(new WindowAdapter(){
       @Override public void windowClosing(WindowEvent e){
@@ -18,13 +18,19 @@ class showAnim{
 
 class AppFrame extends Frame{
   ImageFile imagefile;
-  AppFrame(){ imagefile = new ImageFile("bane.raw");}
+  int num = 0;
+  AppFrame(String fname){ imagefile = new ImageFile(fname);}
   @Override public void update(Graphics g){paint(g);}
   @Override public void paint(Graphics g){
     Image img = imagefile.loadNextFrame();
     if (img != null) {
       g.drawImage(img,10,50,480,360,this);
       repaint(1);
+      num++;
+    }
+    else {
+      System.out.println(num);
+      System.exit(0);//流し終わったら終了
     }
   }
 }
@@ -34,8 +40,8 @@ class ImageFile{
   BufferedImage bImage;
   byte buf[];
   ImageFile(String fname){
-    buf = new byte[160*120];
-    bImage = new BufferedImage(160,120,BufferedImage.TYPE_BYTE_GRAY);
+    buf = new byte[160*240];
+    bImage = new BufferedImage(160,240,BufferedImage.TYPE_BYTE_GRAY);
     try {
       biStream = new BufferedInputStream(new FileInputStream(fname));
     }
@@ -45,10 +51,10 @@ class ImageFile{
   }
   Image loadNextFrame(){
     try {
-      biStream.read(buf,0,160*120);
+      biStream.read(buf,0,160*240);
       int x,y,pixel;
-      for (y=0; y<120; y++) {
-        for (x=0; x<160; x++) {
+      for (y=(120-1); y>=0; y--) {
+        for (x=(160-1); x>=0; x--) {
           pixel = (int)buf[y*160+x]*2;
           if (pixel < 0) {
             biStream.close();

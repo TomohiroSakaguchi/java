@@ -17,14 +17,17 @@ class showAnim{
 }
 
 class AppFrame extends Frame{
-  ImageFile imagefile;
+  private ImageFile imgfile;
+  private ImageFile imgfile2;
   int num = 0;
-  AppFrame(String fname){ imagefile = new ImageFile(fname);}
+  public AppFrame(String fname){ imgfile = new ImageFile(fname);
+    imgfile2 = imgfile;
+  }
   @Override public void update(Graphics g){paint(g);}
   @Override public void paint(Graphics g){
-    Image img = imagefile.loadNextFrame();
+    Image img = imgfile2.loadNextFrame();
     if (img != null) {
-      g.drawImage(img,10,50,480,360,this);
+      g.drawImage(img,10,100,480,360/2,this);
       repaint(1);
       num++;
     }
@@ -36,12 +39,12 @@ class AppFrame extends Frame{
 }
 
 class ImageFile{
-  BufferedInputStream biStream;
-  BufferedImage bImage;
+  private BufferedInputStream biStream;
+  private BufferedImage bImage;
   byte buf[];
   ImageFile(String fname){
-    buf = new byte[160*240];
-    bImage = new BufferedImage(160,240,BufferedImage.TYPE_BYTE_GRAY);
+    buf = new byte[160*120];
+    bImage = new BufferedImage(160,120,BufferedImage.TYPE_BYTE_GRAY);
     try {
       biStream = new BufferedInputStream(new FileInputStream(fname));
     }
@@ -49,9 +52,9 @@ class ImageFile{
       System.err.println("Exception:"+e);
     }
   }
-  Image loadNextFrame(){
+  public Image loadNextFrame(){
     try {
-      biStream.read(buf,0,160*240);
+      biStream.read(buf,0,160*120);
       int x,y,pixel;
       for (y=(120-1); y>=0; y--) {
         for (x=(160-1); x>=0; x--) {
